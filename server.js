@@ -1,21 +1,32 @@
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config()
+}
+
 const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
 
+const indexRouter = require("./routes/index")
 const expenses = require("./routes/expenseRoutes")
 const incomes = require("./routes/incomeRoutes")
 
-const app = express();
-const port = 3000;
-
-
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json({ extended: true }));
-
 app.set("view engine", "ejs")
-
+app.set("views", __dirname + "/views")
 app.use("/public", express.static("public"))
-app.use("/src", express.static("src"))
+
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+
+app.use("/", indexRouter)
+app.use("/transactions/expenses", expenses)
+app.use("/transactions/incomes", incomes)
+
+const mongoose = require("mongoose")
+mongoose.connect(process.env.DATABASE_URL)
+const db = mongoose.connection
+db.on("error", error => console.error(error))
+db.once("open", () => console.log("Connected to Mongoose"))
 
 
 app.use((req, res, next) => {
@@ -31,17 +42,6 @@ ${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}`);
   next();
 });
 
-app.use("/transactions/expenses", expenses)
-app.use("/transactions/incomes", incomes)
-
-app.get("/", (req, res) => {
-  res.render("index");
-});
-
-app.get("/transactions", (req, res) => {
-  res.render("transactions");
-});
-
 app.use((req, res) => {
   res.status(404);
   res.json({ error: "Resource Not Found" });
@@ -52,6 +52,6 @@ app.use((err, req, res, next) => {
   res.json({ error: err.message });
 });
 
-app.listen(port, () => {
-  console.log(`Server listening on port: ${port}`);
-});
+app.listen(process.env.PORT, () => {
+  console.log(`Server listening on port: ${process.env.PORT}`)
+})
