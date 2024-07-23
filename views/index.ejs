@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../public/styles.css" />
+    <title>Document</title>
+  </head>
+  <body>
+
+    <div class="topnav">
+      <a class="active" href="/">Home</a>
+      <a href="./transactions">Transactions</a>
+    </div>
+
+    <h1>Expense Tracker</h1>
+    <h3 style="text-align: center;">Log your income and expenses to see where your money is going and where it's coming from! 🤑 </h3>
+
+    <main>
+      <div id="header">
+        <div>
+          <h5>Balance</h5>
+          <span id="balance">$0.00</span>
+        </div>
+        <div>
+          <h5>Expenses</h5>
+          <span id="expense">$0.00</span>
+        </div>
+        <div>
+          <h5>Income</h5>
+          <span id="income">$0.00</span>
+        </div>
+      </div>
+
+      <section>
+        <h3>Add Transaction</h3>
+        <form id="transactionForm" action="#" method="post">
+
+          <div>
+            <label for="type">
+              <input id="type" type="checkbox" name="type">
+              <div class="option">
+                <span id="exp">Expense</span>
+                <span id="inc">Income</span>
+              </div>
+            </label>
+          </div>
+
+          <div>
+            <label for="name">Name of expense or income:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div>
+            <label for="amount">Amount:</label>
+            <input
+              id="amount"
+              type="number"
+              name="amount"
+              value="0"
+              step="1"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="date">Date:</label>
+            <input id="date" type="date" name="date" required />
+          </div>
+          <button type="submit" id="submitBtn">Submit</button>
+        </form>
+      </section>
+    </main>
+
+    <section id="transactions">
+      <ul id="transactionList"></ul>
+      <div id="status"></div>
+    </section>
+
+    <script src="../src/script.js"></script>
+  </body>
+</html>
