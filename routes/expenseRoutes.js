@@ -6,8 +6,9 @@ const expenses = require("../data/expenses");
 router
   .route("/")
   .get((req, res) => {
-    res.json(expenses); // Keeping this here for future API/application practice
+    // res.json(expenses); // Keeping this here for future API/application practice
     // res.send("<h1>Expense Page</h1>"); // Come back here to create an Expense HTML page
+    res.render("expenses")
   })
   .post((req, res) => {
     if (req.body.name && req.body.amount && req.body.date) {

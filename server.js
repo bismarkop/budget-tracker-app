@@ -5,15 +5,18 @@ if (process.env.NODE_ENV !== "production") {
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
+const expressLayouts = require("express-ejs-layouts")
 
 const indexRouter = require("./routes/index")
 const expenses = require("./routes/expenseRoutes")
 const incomes = require("./routes/incomeRoutes")
 
 app.set("view engine", "ejs")
+app.set("layout", "layouts/layout")
 app.set("views", __dirname + "/views")
-app.use("/public", express.static("public"))
 
+app.use(expressLayouts)
+app.use("/public", express.static("public"))
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
