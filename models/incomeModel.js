@@ -11,6 +11,7 @@ const incomeSchema = new mongoose.Schema({
   },
   category: {
     type: String,
+    required: true,
   },
   date: {
     type: String,
@@ -18,6 +19,6 @@ const incomeSchema = new mongoose.Schema({
   },
 });
 
-const Income = mongoose.model("Expense", incomeSchema)
+const Income = mongoose.model("incomes", incomeSchema)
 module.exports = Income
 

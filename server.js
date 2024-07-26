@@ -29,21 +29,6 @@ const db = mongoose.connection
 db.on("error", error => console.error(error))
 db.once("open", () => console.log("Connected to Mongoose"))
 
-
-// const exampleSchema = new mongoose.Schema({
-//   name: {
-//     type: String,
-//     required: true
-//   }
-// })
-// const collection = new mongoose.model("expenses", exampleSchema)
-
-// data = {
-//   name: "Bizzy"
-// }
-
-// collection.insertMany(data)
-
 app.use((req, res, next) => {
   const time = new Date();
 

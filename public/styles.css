@@ -213,3 +213,15 @@ svg {
 div.action {
   height: 10px;
 }
+
+#instructions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  list-style-type: circle;
+}
+
+#instructions li {
+  padding-bottom: 5px;
+}
