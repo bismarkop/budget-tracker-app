@@ -64,6 +64,7 @@ function addTransaction(e) {
   transactions.push({
     id: transactions.length + 1,
     name: formData.get("name"),
+    category: formData.get("category"),
     amount: parseFloat(formData.get("amount")),
     date: new Date(formData.get("date")),
     type: "on" === formData.get("type") ? "income" : "expense",
@@ -73,7 +74,6 @@ function addTransaction(e) {
   saveTransaction();
   renderList();
   updateTotal();
-  // populateTrx()
 }
 
 function deleteTransaction(id) {
@@ -105,8 +105,4 @@ function updateTotal() {
   balance.textContent = formatter.format(balanceTotal).substring(1);
   income.textContent = formatter.format(incomeTotal);
   expense.textContent = formatter.format(expenseTotal * -1);
-}
-
-function populateTrx() {
-  transactions2.innerHTML = list2.value;
 }

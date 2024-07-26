@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const expenseSchema = new mongoose.Schema({
+const incomeSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -11,7 +11,6 @@ const expenseSchema = new mongoose.Schema({
   },
   category: {
     type: String,
-    required: true,
   },
   date: {
     type: String,
@@ -19,7 +18,6 @@ const expenseSchema = new mongoose.Schema({
   },
 });
 
-const Expense = mongoose.model("Expense", expenseSchema)
-module.exports = Expense
-
+const Income = mongoose.model("Expense", incomeSchema)
+module.exports = Income
 

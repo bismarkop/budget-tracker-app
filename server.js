@@ -1,36 +1,48 @@
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config()
-}
-
 const express = require("express");
+const dotenv = require("dotenv")
+dotenv.config()
 const app = express();
-const bodyParser = require("body-parser");
 const expressLayouts = require("express-ejs-layouts")
 
 const indexRouter = require("./routes/index")
-const expenses = require("./routes/expenseRoutes")
-const incomes = require("./routes/incomeRoutes")
+const expenseRouter = require("./routes/expenseRoutes")
+const incomeRouter = require("./routes/incomeRoutes")
 
 app.set("view engine", "ejs")
-app.set("layout", "layouts/layout")
+app.set("layout", "layoutView")
 app.set("views", __dirname + "/views")
 
 app.use(expressLayouts)
 app.use("/public", express.static("public"))
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 
 app.use("/", indexRouter)
-app.use("/transactions/expenses", expenses)
-app.use("/transactions/incomes", incomes)
+app.use("/transactions/expenses", expenseRouter)
+app.use("/transactions/incomes", incomeRouter)
 
+// Database Connection
 const mongoose = require("mongoose")
 mongoose.connect(process.env.DATABASE_URL)
 const db = mongoose.connection
 db.on("error", error => console.error(error))
 db.once("open", () => console.log("Connected to Mongoose"))
 
+
+// const exampleSchema = new mongoose.Schema({
+//   name: {
+//     type: String,
+//     required: true
+//   }
+// })
+// const collection = new mongoose.model("expenses", exampleSchema)
+
+// data = {
+//   name: "Bizzy"
+// }
+
+// collection.insertMany(data)
 
 app.use((req, res, next) => {
   const time = new Date();
@@ -44,6 +56,7 @@ ${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}`);
   }
   next();
 });
+
 
 app.use((req, res) => {
   res.status(404);
