@@ -17,11 +17,6 @@ app.use("/public", express.static("public"))
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-app.use("/", indexRouter)
-app.use("/transactions/expenses", expenseRouter)
-app.use("/transactions/incomes", incomeRouter)
-
 // Database Connection
 const mongoose = require("mongoose")
 mongoose.connect(process.env.DATABASE_URL)
@@ -41,6 +36,15 @@ ${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}`);
   }
   next();
 });
+
+
+app.use("/", indexRouter)
+app.use("/transactions/expenses", expenseRouter)
+app.use("/transactions/incomes", incomeRouter)
+
+
+
+
 
 
 app.use((req, res) => {

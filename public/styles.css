@@ -37,6 +37,10 @@ h1 {
   padding: 25px;
 }
 
+ol li {
+  margin-bottom: 3px;
+}
+
 #header {
   display: flex;
   flex-wrap: wrap;

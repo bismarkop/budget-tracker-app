@@ -38,7 +38,8 @@
       </ul>
     </div>
     <main>
-      <div id="header">
+      <!-- Commented this out because this was only needed for DOM manipulation. I will come back to this after solidifying database functionality -->
+      <!-- <div id="header">
         <div>
           <h5>Balance</h5>
           <span id="balance">$0.00</span>
@@ -51,13 +52,18 @@
           <h5>Income</h5>
           <span id="income">$0.00</span>
         </div>
-      </div>
+      </div> -->
 
       <section>
-        <h3>Add Transaction</h3>
+        <h3 style="text-align: center; margin-bottom: 5px;">Add Transaction</h3>
+        <ol style="align-items: center; text-align: center; display: flex; flex-direction: column; justify-content: space-around;">
+          <li>Select "Expense" or "Income"</li>
+          <li>Enter information into all of the fields</li>
+          <li>Hit "Submit"</li>
+        </ol>
         <form
           id="transactionForm"
-          action="/transactions/expenses/tracker"
+          action="/tracker"
           method="post"
         >
           <div>
@@ -107,6 +113,5 @@
       <div id="status"></div>
     </section>
 
-    <script src="/../public/script.js"></script>
   </body>
 </html>
