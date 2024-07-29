@@ -78,7 +78,7 @@ router
     } 
     catch (error) {
       console.error("Error saving data", error);
-      re.status(500).send("Error saving data");
+      res.status(500).send("Error saving data");
     }
   });
 

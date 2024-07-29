@@ -20,7 +20,8 @@ let formatter = new Intl.NumberFormat("en-US", {
   signDisplay: "always",
 });
 
-form.addEventListener("submit", addTransaction);
+// Commented this out because it was causing a disruption in sending the form data to the database. I will be coming back to this file in the future
+// form.addEventListener("submit", addTransaction);
 
 function renderList() {
   list.innerHTML = "";
