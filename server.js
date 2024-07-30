@@ -37,14 +37,9 @@ ${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}`);
   next();
 });
 
-
 app.use("/", indexRouter)
 app.use("/transactions/expenses", expenseRouter)
 app.use("/transactions/incomes", incomeRouter)
-
-
-
-
 
 
 app.use((req, res) => {
