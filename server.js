@@ -38,8 +38,8 @@ ${time.toLocaleTimeString()}: Received a ${req.method} request to ${req.url}`);
 });
 
 app.use("/", indexRouter)
-app.use("/transactions/expenses", expenseRouter)
-app.use("/transactions/incomes", incomeRouter)
+app.use("/expenses", expenseRouter)
+app.use("/incomes", incomeRouter)
 
 
 app.use((req, res) => {
@@ -51,6 +51,56 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.json({ error: err.message });
 });
+
+const seedExpenses = [
+  {
+      id: "1",
+      name: "groceries",
+      category: "food",
+      amount: "200",
+      date: "7/1/2024",
+  },
+  {
+      id: "2",
+      name: "movies",
+      category: "entertainment",
+      amount: "40",
+      date: "7/5/2024",
+  },
+  {
+      id: "3",
+      name: "seamless",
+      category: "takeout",
+      amount: "50",
+      date: "7/6/2024",
+  }
+]
+
+const seedIncomes = [
+  {
+      id: "1",
+      name: "Pay Day",
+      category: "Weekly Income",
+      amount: "3000",
+      date: "7/5/2024",
+  },
+  {
+      id: "2",
+      name: "Massage Client",
+      category: "client",
+      amount: "160",
+      date: "7/3/2024",
+  },
+  {
+      id: "3",
+      name: "Pay Day",
+      category: "Weekly Income",
+      amount: "3000",
+      date: "7/12/2024",
+  }
+]
+
+
 
 app.listen(process.env.PORT, () => {
   console.log(`Server listening on port: ${process.env.PORT}`)

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Income</title>
+</head>
+<body>
+    <h1>Edit Income</h1>
+    <form id="editForm" action="/incomes" method="put">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+
+          <div>
+            <label for="category">Category:</label>
+            <input type="text" id="category" name="category" />
+          </div>
+
+          <div>
+            <label for="amount">Amount:</label>
+            <input
+              id="amount"
+              type="number"
+              name="amount"
+              value="0"
+              step="1"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="date">Date:</label>
+            <input id="date" type="date" name="date" required />
+          </div>
+          <button type="submit" id="submitBtn">Submit</button>
+    </form>
+</body>
+</html>

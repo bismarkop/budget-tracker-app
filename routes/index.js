@@ -41,16 +41,12 @@ router.get("/transactions", async (req, res) => {
   res.render("transactions");
 });
 
-
-
-
 router
   .route("/tracker")
   .get(async (req, res, next) => {
     res.render("tracker");
   })
   .post(async (req, res) => {
-    console.log(req.body);
     try {
       if (req.body.type == "on") {
         let newIncome = new Income({
