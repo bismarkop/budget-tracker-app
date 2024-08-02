@@ -5,7 +5,7 @@ const Income = require("../models/incomeModel.js");
 router
   .route("/")
   .get(async (req, res) => {
-    let incomeData = await Income.find({}).limit(5)
+    let incomeData = await Income.find({}).limit(10).sort({"date": 1})
       res.render("incomes", {
         incomeList: incomeData
       });
@@ -38,6 +38,19 @@ router
       res.status(500).json({message: error})
     }
   })
+  .delete(async (req, res) => {
+    const deleteIncome = await Income.findByIdAndDelete(req.params.id);
+
+    if (!deleteIncome) {
+      res.status(404).json({message: "ID not found."})
+    };
+      
+    res.send("Successfully remove entry")
+    setTimeout(() => {
+      res.render("incomes")
+    }, 2000);
+  });
+  
 
 router
   .route('/:id/edit')
@@ -57,24 +70,12 @@ router
         console.log("Data was saved");
       }
     } 
-    
     catch (error) {
       console.error("Error saving data", error);
       res.status(500).send("Error saving data");
     }
   });
-  
 
-  // .delete(async (req, res, next) => {
-  //   const income = incomes.find((e, i) => {
-  //     if (e.id == req.params.id) {
-  //       incomes.splice(i, 1);
-  //       return true;
-  //     }
-  //   });
 
-  //   if (income) res.json(income);
-  //   else next()
-  // });
   
 module.exports = router;

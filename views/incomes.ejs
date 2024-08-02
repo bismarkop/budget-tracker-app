@@ -36,11 +36,19 @@
             <td><%= incomeData.date %></td>
             <td><%= incomeData.name %></td>
             <td>$<%= incomeData.amount %></td>
+            <div>
+              /// Figure out how to get this to work
+              <td><a href=`incomes/<%= incomeData.id %>/edit`>Edit</a></td>
+              <td><button id="delete">Delete</button></td>
+            </div>
+            
           </tr>
             <%})%>
           
         </tbody>
       </table>
     </section>
+
+    <script src="../public/editOrDelete.js"></script>
   </body>
 </html>
