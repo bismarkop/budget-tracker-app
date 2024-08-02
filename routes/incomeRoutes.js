@@ -5,7 +5,13 @@ const Income = require("../models/incomeModel.js");
 router
   .route("/")
   .get(async (req, res) => {
-    res.render("incomes");
+    let incomeData = await Income.find({}).limit(5)
+      res.render("incomes", {
+        incomeList: incomeData
+      });
+     
+    
+
     // try {
     //   const incomes = await Income.find({});
     //   res.status(200).render(incomes)
@@ -17,10 +23,20 @@ router
 
 router
   .route("/:id")
-  .get(async (req, res, next) => {
-    const income = await Income.findById(req.params.id);
-    if (income) res.json(income);
-    else next();
+  .get(async (req, res) => {
+    try {
+      const income = await Income.findById(req.params.id);
+
+      if (!income) {
+        res.status(404).json({message: "User not found."})
+      }
+      else {
+        res.status(200).json(income);
+      }
+    } 
+    catch (error) {
+      res.status(500).json({message: error})
+    }
   })
 
 router
@@ -28,23 +44,17 @@ router
   .get(async (req, res) => {
     res.render('income/edit');
   })
-  .patch(async (req, res) => {
+  .put(async (req, res) => {
     try {
-      let updatedData = {
-        name: req.body.name,
-        category: req.body.category,
-        amount: req.body.amount,
-        date: req.body.date,
-        // Include other fields as necessary
-      };
-
-      let income = await Income.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, updatedData));
+      let incomeUpdate = await Income.findByIdAndUpdate(req.params.id, req.body, { new: true });
       
-      if (income) {
-        console.log("Data was saved");
-        res.json(income);
-      } else {
+      if (!incomeUpdate) {
         res.status(404).send("Income not found");
+      } 
+      
+      else {
+        await incomeUpdate.save()
+        console.log("Data was saved");
       }
     } 
     
@@ -55,36 +65,6 @@ router
   });
   
 
-  
-// router
-//   .route("/:id/edit")
-//   .get(async (req, res) => {
-//     res.render("income/edit")
-//   })
-//   .put(async (req, res) => {
-//     console.log(req.body)
-
-//     try {
-//     const income = await Income.findOneAndUpdate((inc, i) => {
-//       if (inc.id == req.params.id) {
-//         for (const key in req.body) {
-//           Income[i][key] = req.body[key];
-//         }
-//         income.save()
-//         console.log("Data was saved")
-//         res.send("Done!")
-//       }
-//     });
-
-//     if (income) res.json(income);
-//     else next();
-//     }
-//     catch {
-//       console.error("Error saving data", error);
-//       res.status(500).send("Error saving data");
-//     }
-//   })
-  
   // .delete(async (req, res, next) => {
   //   const income = incomes.find((e, i) => {
   //     if (e.id == req.params.id) {

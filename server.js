@@ -4,6 +4,7 @@ dotenv.config()
 const app = express();
 const expressLayouts = require("express-ejs-layouts")
 
+// Routes
 const indexRouter = require("./routes/index")
 const expenseRouter = require("./routes/expenseRoutes")
 const incomeRouter = require("./routes/incomeRoutes")
