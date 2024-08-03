@@ -55,9 +55,11 @@ router
 router
   .route('/:id/edit')
   .get(async (req, res) => {
-    res.render('income/edit');
+    let getId = Income.findById(req.params.id)
+    console.log(req.params.id)
+    res.render('income/edit', {update: getId });
   })
-  .put(async (req, res) => {
+  .put(async (req, res, next) => {
     try {
       let incomeUpdate = await Income.findByIdAndUpdate(req.params.id, req.body, { new: true });
       
@@ -67,7 +69,9 @@ router
       
       else {
         await incomeUpdate.save()
+        res.render("incomes")
         console.log("Data was saved");
+        next()
       }
     } 
     catch (error) {
