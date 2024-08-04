@@ -37,8 +37,11 @@
             <td><%= incomeData.name %></td>
             <td>$<%= incomeData.amount %></td>
             <div>
-              <td><a href="incomes/<%= incomeData.id %>/edit">Edit</a></td>
-              <td><button id="delete">Delete</button></td>
+              <td><a id="<%= incomeData.id %>" href="incomes/<%= incomeData.id %>/edit">Edit</a></td>
+
+              <td><form id="delete" action="incomes/<%= incomeData.id %>/delete" method="post">
+                <input type="submit" value="DELETE">
+              </form></td>
             </div>
             
           </tr>
@@ -47,7 +50,5 @@
         </tbody>
       </table>
     </section>
-
-    <script src="../public/editOrDelete.js"></script>
   </body>
 </html>
